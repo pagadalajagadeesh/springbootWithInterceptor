@@ -10,7 +10,6 @@ pipeline {
         stage('Gradle Build') { 
             steps {
                   echo 'Gradle Building...'
-                  bat 'cd ..'
                   bat 'gradlew build -x test' 
             }
         }
