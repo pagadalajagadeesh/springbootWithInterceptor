@@ -4,7 +4,7 @@ pipeline {
         stage('Git Clone') { 
             steps {
                  echo 'Cloning...'
-                 git 'https://github.com/denisdbell/spring-petclinic.git'
+                 bat ' git clone https://github.com/denisdbell/spring-petclinic.git'
             }
         }
         stage('Gradle Build') { 
