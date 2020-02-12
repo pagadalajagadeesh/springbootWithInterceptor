@@ -19,12 +19,18 @@ pipeline {
                   bat 'docker build -t  pagadalajagadeesh/springboot .'
             }
         }
-        
+         stage('Docker removing old container ') { 
+            steps {
+                  echo 'removing old container...'
+                  bat 'docker container stop springboot'
+                  bat 'docker rm -v springboot'
+            }
+        }
    
    		stage('Deploy Spring Boot Application') {
           steps {
         		 echo 'Docker Building...'
-                 bat 'docker container run -p 8080:8080 -d pagadalajagadeesh/springboot'
+                 bat 'docker container run -p 8080:8080 -d --name springboot pagadalajagadeesh/springboot'
           }
    		}
     }
