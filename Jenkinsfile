@@ -22,8 +22,8 @@ pipeline {
          stage('Docker removing old container ') { 
             steps {
                   echo 'removing old container...'
-                  bat 'docker container stop springboot'
-                  bat 'docker rm -v springboot'
+               //   bat 'docker container stop springboot'
+                //  bat 'docker rm -v springboot'
             }
         }
    
