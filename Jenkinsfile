@@ -10,7 +10,7 @@ pipeline {
         stage('Gradle Build') { 
             steps {
                   echo 'Gradle Building...'
-                  bat 'gradlew build -x test' 
+                  bat 'gradle build -x test' 
             }
         }
         stage('Docker Build') { 
