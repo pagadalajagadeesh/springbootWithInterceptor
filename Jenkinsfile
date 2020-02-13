@@ -36,7 +36,8 @@ pipeline {
    		stage('Deploy Spring Boot Application') {
           steps {
         		 echo 'Docker Building...'
-                 bat 'docker container run -p 8081:8081 -d --name springboot pagadalajagadeesh/springboot'
+            //     bat 'docker container run -p 8081:8081 -d --name springboot pagadalajagadeesh/springboot'
+               bat 'docker container run --publish 8000:8080 --detach --name springboot pagadalajagadeesh/springboot'
           }
    		}
     }
