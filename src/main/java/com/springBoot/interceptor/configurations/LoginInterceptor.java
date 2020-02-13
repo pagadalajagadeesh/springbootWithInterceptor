@@ -13,8 +13,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("in prehandle method");
+//		System.out.println("in prehandle method");
 		return true;
 	}
 

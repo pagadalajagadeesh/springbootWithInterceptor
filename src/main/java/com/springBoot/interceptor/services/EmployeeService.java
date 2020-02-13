@@ -11,10 +11,22 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository repository;
 
-	public Object saveEmployee() {
-
-		Employee emp = new Employee("jagadeesh", "8099311229", "pj@gmail.com");
+	public Object saveEmployee(Employee emp) {
 		repository.save(emp);
+		return repository.findAll();
+	}
+
+	public Object updateEmployee(Employee emp) {
+		repository.save(emp);
+		return repository.findAll();
+	}
+
+	public Object deleteEmployee(Employee employee) {
+		repository.delete(employee);
+		return repository.findAll();
+	}
+
+	public Object getEmployees() {
 		return repository.findAll();
 	}
 
