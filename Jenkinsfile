@@ -22,8 +22,12 @@ pipeline {
          stage('Docker removing old container ') { 
             steps {
                   echo 'removing old container...'
+                try{
                   bat 'docker container stop springboot'
                   bat 'docker rm -v springboot'
+                } catch(Exception e){
+                  echo 'Exception occurred while removing old container...'
+                }
             }
         }
    
