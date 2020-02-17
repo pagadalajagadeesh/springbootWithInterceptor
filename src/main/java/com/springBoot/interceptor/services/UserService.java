@@ -19,7 +19,7 @@ public class UserService {
 
 	public Object createUser(User user) {
 
-		if (userRepository.findByUsername(user.getUsername()) == null) {
+		if (userRepository.findTopByUsername(user.getUsername()) == null) {
 			user.setValidationKey(getUUID());
 			userRepository.save(user);
 			return user;
@@ -29,15 +29,14 @@ public class UserService {
 
 	}
 
-	public Object login(String username, String password, HttpServletRequest request) {
-		User user = userRepository.findByUsername(username);
+	public Object login(String username, String password) {
+//		User user = userRepository.findTopByUsername(username);
+		User user = userRepository.findTopByUsername(username);
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
 				String key = getUUID();
 				user.setValidationKey(key);
 				userRepository.save(user);
-				request.getSession().setAttribute("validationKey", key);
-				request.getSession().setAttribute("user", user);
 				return key;
 			} else {
 				return "incorrect password";
@@ -52,11 +51,15 @@ public class UserService {
 		return RandomStringUtils.randomAlphanumeric(64).toUpperCase();
 	}
 
-	/*
-	 * public Object logout(String validationKey, HttpServletRequest request) { User
-	 * user = userRepository.findByValidationKey(validationKey); if (user != null) {
-	 * request.getSession().setAttribute("validationKey", validationKey);
-	 * user.setValidationKey(null); userRepository.save(user); } return null; }
-	 */
+	public Object logout(String validationKey, HttpServletRequest request) {
+		User user = userRepository.findByValidationKey(validationKey);
+		if (user != null) {
+			request.getSession().setAttribute("validationKey", validationKey);
+			user.setValidationKey(null);
+			userRepository.save(user);
+			return "logout success";
+		}
+		return "failed to logout";
+	}
 
 }

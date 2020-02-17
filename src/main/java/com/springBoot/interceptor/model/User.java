@@ -1,5 +1,8 @@
 package com.springBoot.interceptor.model;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +22,10 @@ public class User {
 	private String email;
 
 	private String validationKey;
+
+	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
+
+	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
 	public User() {
 	}
@@ -69,6 +76,18 @@ public class User {
 		this.password = password;
 		this.email = email;
 		this.validationKey = validationKey;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
 	}
 
 }
