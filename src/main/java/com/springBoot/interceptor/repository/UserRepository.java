@@ -28,7 +28,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 		}
 	}
 
-			@Query(value = "SELECT * FROM user where validation_key is not null and TIMESTAMPDIFF(MINUTE,updated_at,?1 ) > 5",nativeQuery = true)
+			@Query(value = "SELECT * FROM user where validationKey is not null and TIMESTAMPDIFF(MINUTE,updatedAt,?1 ) > 5",nativeQuery = true)
 			List<User> findUserByUpdatedAt(Timestamp time);
 			
 }

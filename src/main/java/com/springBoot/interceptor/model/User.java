@@ -3,6 +3,7 @@ package com.springBoot.interceptor.model;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,17 +15,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
+	@Column(name = "username")
 	private String username;
-
+	@Column(name = "password")
 	private String password;
-
+	@Column(name = "email")
 	private String email;
-
+	@Column(name = "validationKey")
 	private String validationKey;
-
+	@Column(name = "createdAt")
 	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
-
+	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
 	public User() {
