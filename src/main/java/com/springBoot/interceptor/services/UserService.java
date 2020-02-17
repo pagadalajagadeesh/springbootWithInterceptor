@@ -51,10 +51,9 @@ public class UserService {
 		return RandomStringUtils.randomAlphanumeric(64).toUpperCase();
 	}
 
-	public Object logout(String validationKey, HttpServletRequest request) {
+	public Object logout(String validationKey) {
 		User user = userRepository.findByValidationKey(validationKey);
 		if (user != null) {
-			request.getSession().setAttribute("validationKey", validationKey);
 			user.setValidationKey(null);
 			userRepository.save(user);
 			return "logout success";

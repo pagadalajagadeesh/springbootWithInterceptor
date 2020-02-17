@@ -57,8 +57,8 @@ public class LoginController implements ErrorController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public Object logout(@RequestBody String validationKey, HttpServletRequest request) {
-		return userService.logout(validationKey, request);
+	public Object logout(@RequestBody User user) {
+		return userService.logout(user.getValidationKey());
 	}
 
 	@RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
