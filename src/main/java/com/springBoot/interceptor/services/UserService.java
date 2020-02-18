@@ -1,5 +1,7 @@
 package com.springBoot.interceptor.services;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +38,8 @@ public class UserService {
 			if (user.getPassword().equals(password)) {
 				String key = getUUID();
 				user.setValidationKey(key);
+				user.setMessage(null);
+				user.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 				userRepository.save(user);
 				return key;
 			} else {

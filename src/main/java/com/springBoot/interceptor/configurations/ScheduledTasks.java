@@ -24,10 +24,14 @@ public class ScheduledTasks {
 		System.out.println(usersList.size());
 		if(usersList.size()>0) {
 			for(User user : usersList) {
-				user.setValidationKey(null);
-				userRepository.save(user);
+				try {
+					user.setValidationKey(null);
+					user.setMessage("session expired, Please login again to continue...");
+					userRepository.save(user);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
 	}
 }

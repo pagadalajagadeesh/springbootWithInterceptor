@@ -27,6 +27,8 @@ public class User {
 	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
+	@Column(name = "message")
+	private String message;
 
 	public User() {
 	}
@@ -89,6 +91,14 @@ public class User {
 
 	public Timestamp getCreatedAt() {
 		return createdAt;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }
