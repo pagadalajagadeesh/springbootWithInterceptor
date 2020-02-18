@@ -50,7 +50,6 @@ public class UserService {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private String getUUID() {
 		return RandomStringUtils.randomAlphanumeric(64).toUpperCase();
 	}
