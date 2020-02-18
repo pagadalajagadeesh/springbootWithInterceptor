@@ -64,4 +64,8 @@ public class UserService {
 		return "failed to logout";
 	}
 
+	public Object getUsers() {
+		return userRepository.findAll();
+	}
+
 }

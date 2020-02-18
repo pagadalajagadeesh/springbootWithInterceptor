@@ -1,16 +1,18 @@
 	var app = angular.module('quoteApp', []);
 	app.controller('postcontroller', function($scope, $http, $location) {
 		$scope.submitForm = function(){
-			var url = $location.absUrl() + "products";
+			
+			var url = $location.absUrl() + "createUser";
 			
 			var config = {
 	                headers : {
-	                    'Accept': 'text/plain'
+	                    'Accept': 'application/json'
 	                }
 	        }
 			var data = {
-	               id: $scope.id,
-	            quote: $scope.name
+	               username: $scope.username,
+	            password: $scope.password,
+	            email :$scope.email
 	        };
 			
 			$http.post(url, data, config).then(function (response) {

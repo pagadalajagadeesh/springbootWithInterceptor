@@ -7,10 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Controller
-@RequestMapping(value = "/views")
 public class ViewController extends WebMvcConfigurerAdapter {
 
-	@RequestMapping(value = "/view")
+	@RequestMapping(value = "/")
 	public String index(Model model) {
 //		ModelAndView mav = new ModelAndView();
 //		mav.addObject("message", "hi");

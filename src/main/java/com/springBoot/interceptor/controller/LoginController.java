@@ -46,20 +46,7 @@ public class LoginController implements ErrorController {
 		return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
-	public Object createUser(@RequestBody User user) {
-		return userService.createUser(user);
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Object login(@RequestBody User user) {
-		return userService.login(user.getUsername(), user.getPassword());
-	}
-
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public Object logout(@RequestBody User user) {
-		return userService.logout(user.getValidationKey());
-	}
+	
 
 	@RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
 	public Object saveEmployee(@RequestBody Employee employee) {

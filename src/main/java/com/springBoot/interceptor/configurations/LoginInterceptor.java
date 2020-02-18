@@ -26,15 +26,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String key = request.getParameter("validationKey");
 
-		User user = userRepository.findByValidationKey(key);
-		if (user != null) {
-			user.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-			userRepository.save(user);
+//		User user = userRepository.findByValidationKey(key);
+//		if (user != null) {
+//			user.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+//			userRepository.save(user);
 			return true;
-		} else {
-			response.getWriter().write("user not found or session may expired");
-			return false;
-		}
+//		} else {
+//			response.getWriter().write("user not found or session may expired");
+//			return false;
+//		}
 	}
 
 	@Override

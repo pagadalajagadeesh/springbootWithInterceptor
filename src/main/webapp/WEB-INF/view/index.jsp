@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="javax.servlet.*" %>
 <!DOCTYPE HTML>
  
 <html>
@@ -7,31 +8,45 @@
 	  <title>Quotes</title>
 	  <meta charset="utf-8" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1" />
-	       <script src="/js/angular.min.js" ></script>    
-        <script src="/js/app.js"></script>
+	       <script src="<%= request.getContextPath() %>/js/angular.min.js" ></script>    
+        <script src="<%= request.getContextPath() %>/js/app.js"></script>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	  <link href="css/app.css" rel="stylesheet"/>
+	  <link href="<%= request.getContextPath() %>/css/app.css" rel="stylesheet"/>
 </head>
 <body>
  
 <div class="container" ng-app="quoteApp">
  
-	<h3 style="color:blue">Feel inspired by Famous Quotes.</h3>
+	<h3 style="color:blue">create users</h3>
 	
 	<div ng-controller="postcontroller">
-		<form class="form-horizontal" name="quoteForm" ng-submit="submitForm()">
-			<div class="form-group">
+		<form class="form-horizontal" method="post" name="quoteForm" ng-submit="submitForm()">
+			<!-- <div class="form-group">
 				<label class="control-label col-sm-2" for="quoteId">Id:</label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" name="quoteId" id="quoteId"
 						placeholder="1" ng-model="id"/>
 				</div>
+			</div> -->
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="quote">username : </label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" name="username" id="username"
+						placeholder="Enter username" ng-model="username"/>
+				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="quote">Quote:</label>
+				<label class="control-label col-sm-2" for="quote">password : </label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" name="quote" id="quote"
-						placeholder="Enter Quote" ng-model="quote"/>
+					<input type="text" class="form-control" name="password" id="password"
+						placeholder="Enter password" ng-model="password"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="quote">email:</label>
+				<div class="col-sm-5">
+					<input type="email" class="form-control" name="email" id="email"
+						placeholder="Enter email" ng-model="email"/>
 				</div>
 			</div>
 			<div class="form-group">

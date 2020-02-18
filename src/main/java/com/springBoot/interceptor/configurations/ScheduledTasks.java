@@ -16,8 +16,8 @@ public class ScheduledTasks {
 	@Autowired
 	UserRepository userRepository;
 	
-//	@Scheduled(fixedRate = 300000)
-	@Scheduled(fixedRate = 5000)
+	@Scheduled(fixedRate = 300000)
+//	@Scheduled(fixedRate = 5000)
 	public void invalidateSessions() {
 		
 		List<User> usersList = userRepository.findUserByUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
