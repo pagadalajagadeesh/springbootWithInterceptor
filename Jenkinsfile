@@ -4,12 +4,14 @@ pipeline {
         stage('Old war backup') { 
             steps {
                  echo 'Old war backup'
+                 script {
                 try{
                   bat 'mkdir war'
                   bat 'move build\\libs\\*.war war\\'
                 } catch(Exception e){
                   echo 'Exception occurred while removing old container...'
-                }                               
+                }
+              }
             }
         }        
         stage('Git Clone') { 
