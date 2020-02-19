@@ -26,7 +26,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Object login(@RequestBody User user) {
+	public Object login(@RequestBody User user)  {
 		return userService.login(user.getUsername(), user.getPassword());
 	}
 

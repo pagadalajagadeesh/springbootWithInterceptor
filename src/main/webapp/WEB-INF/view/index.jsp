@@ -12,15 +12,44 @@
 <script src="<%=request.getContextPath()%>/js/app.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<link href="<%=request.getContextPath()%>/css/app.css"
-	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/css/app.css" rel="stylesheet" />
 </head>
 <body>
 
 	<div class="container" ng-app="quoteApp">
 
-		<h3 style="color: blue">create users</h3>
+		<h3 style="color: blue">Login</h3>
 
+		<div ng-controller="loginController">
+			<form class="form-horizontal" method="post" name="quoteForm"
+				ng-submit="login()">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="quote">username
+						: </label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="username"
+							id="username1" placeholder="Enter username" ng-model="username1" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="quote">password
+						: </label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="password"
+							id="password1" placeholder="Enter password" ng-model="password1" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+
+	<h3 style="color: blue">create users</h3>
 		<div ng-controller="postcontroller">
 			<form class="form-horizontal" method="post" name="quoteForm"
 				ng-submit="submitForm()">

@@ -2,6 +2,9 @@ package com.springBoot.interceptor.services;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +38,22 @@ public class UserService {
 
 	}
 
-	public Object login(String username, String password) {
+	public Object login(String username, String password)  {
 //		User user = userRepository.findTopByUsername(username);
-		User user = userRepository.findByUsername(username).size()>0?userRepository.findByUsername(username).get(0):null;
+		List<User> userList = userRepository.findByUsername(username);
+		User user = userList.size()>0?userList.get(0):null;
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
 				UserLoginTransaction userLoginTransaction = new UserLoginTransaction();
 				String key = getUUID();
-				userLoginTransaction.setUser(user);
+				userLoginTransaction.setUserId(user.getId());
 				userLoginTransaction.setUsername(user.getUsername());
 				userLoginTransaction.setValidationKey(key);
 				userLoginTransaction.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 				userLoginTransactionRepository.save(userLoginTransaction);
-				return key;
+				Map<String,String> map = new HashMap<String,String>();
+				map.put("validationKey", key);
+				return map;
 			} else {
 				return "incorrect password";
 			}

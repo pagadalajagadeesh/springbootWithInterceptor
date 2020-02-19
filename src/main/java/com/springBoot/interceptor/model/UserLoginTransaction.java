@@ -18,9 +18,8 @@ public class UserLoginTransaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId")
-	private User user;
+	@Column(name = "userId")
+	private long userId;
 	@Column(name = "validationKey")
 	private String validationKey;
 	@Column(name = "createdAt")
@@ -38,12 +37,12 @@ public class UserLoginTransaction {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getValidationKey() {

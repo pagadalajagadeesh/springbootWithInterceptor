@@ -19,7 +19,7 @@ public interface UserLoginTransactionRepository extends CrudRepository<UserLogin
 	List<UserLoginTransaction> findUserByUpdatedAt(Timestamp time);
 	
 	default boolean userValidation(UserLoginTransaction users, String key) {
-		User user = findTopByUsername(users.getUser().getUsername());
+		User user = findTopByUsername(users.getUsername());
 		if (user != null) {
 			if (users.getValidationKey().equals(key)) {
 				return true;
