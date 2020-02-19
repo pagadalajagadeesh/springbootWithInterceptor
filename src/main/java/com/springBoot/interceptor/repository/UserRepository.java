@@ -1,34 +1,15 @@
 package com.springBoot.interceptor.repository;
 
-import java.sql.Timestamp;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.springBoot.interceptor.model.User;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-	
-	User findTopByUsername(String username);
+//	@Query(value = "SELECT * FROM UserLoginTransaction where validationKey is not null and TIMESTAMPDIFF(MINUTE,updatedAt,?1 ) > 10", nativeQuery = true)
+//	User findTopByUsername(String username);
 
-	User findByValidationKey(String validationKey);
-	
-	default boolean userValidation(User users, String key) {
-		User user = findTopByUsername(users.getUsername());
-		if(user!=null) {
-			if(user.getValidationKey().equals(key)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-			@Query(value = "SELECT * FROM user where validationKey is not null and TIMESTAMPDIFF(MINUTE,updatedAt,?1 ) > 5",nativeQuery = true)
-			List<User> findUserByUpdatedAt(Timestamp time);
-			
+	List<User> findByUsername(String username);
 }

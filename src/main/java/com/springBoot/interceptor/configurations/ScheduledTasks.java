@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.springBoot.interceptor.model.User;
+import com.springBoot.interceptor.model.UserLoginTransaction;
+import com.springBoot.interceptor.repository.UserLoginTransactionRepository;
 import com.springBoot.interceptor.repository.UserRepository;
 @Component
 public class ScheduledTasks {
@@ -16,18 +17,19 @@ public class ScheduledTasks {
 	@Autowired
 	UserRepository userRepository;
 	
-	@Scheduled(fixedRate = 300000)
+	@Autowired
+	UserLoginTransactionRepository userLoginTransactionRepository;
+	
+	@Scheduled(fixedRate = 500000)
 //	@Scheduled(fixedRate = 5000)
 	public void invalidateSessions() {
 		
-		List<User> usersList = userRepository.findUserByUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
+		List<UserLoginTransaction> usersList = userLoginTransactionRepository.findUserByUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
 		System.out.println(usersList.size());
 		if(usersList.size()>0) {
-			for(User user : usersList) {
+			for(UserLoginTransaction user : usersList) {
 				try {
-					user.setValidationKey(null);
-					user.setMessage("session expired, Please login again to continue...");
-					userRepository.save(user);
+					userLoginTransactionRepository.delete(user);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

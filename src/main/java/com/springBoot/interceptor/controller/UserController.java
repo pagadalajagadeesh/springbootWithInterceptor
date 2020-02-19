@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springBoot.interceptor.model.User;
+import com.springBoot.interceptor.model.UserLoginTransaction;
 import com.springBoot.interceptor.services.EmployeeService;
 import com.springBoot.interceptor.services.UserService;
 
@@ -30,8 +31,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public Object logout(@RequestBody User user) {
-		return userService.logout(user.getValidationKey());
+	public Object logout(@RequestBody UserLoginTransaction userLoginTransaction) {
+		return userService.logout(userLoginTransaction.getValidationKey());
 	}
 	
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)

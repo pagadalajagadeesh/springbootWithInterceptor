@@ -2,15 +2,14 @@ package com.springBoot.interceptor.services;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springBoot.interceptor.model.User;
+import com.springBoot.interceptor.model.UserLoginTransaction;
+import com.springBoot.interceptor.repository.UserLoginTransactionRepository;
 import com.springBoot.interceptor.repository.UserRepository;
 
 @Service
@@ -18,11 +17,16 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserLoginTransactionRepository userLoginTransactionRepository;
 
 	public Object createUser(User user) {
-
-		if (userRepository.findTopByUsername(user.getUsername()) == null) {
-			user.setValidationKey(getUUID());
+		System.out.println("*********************");
+		System.out.println(user.getUsername());
+		System.out.println("*********************");
+		System.out.println(userRepository.findByUsername(user.getUsername()).size());
+		System.out.println("*********************");
+		if (userRepository.findByUsername(user.getUsername()).size()==0) {
 			userRepository.save(user);
 			return user;
 		} else {
@@ -33,14 +37,16 @@ public class UserService {
 
 	public Object login(String username, String password) {
 //		User user = userRepository.findTopByUsername(username);
-		User user = userRepository.findTopByUsername(username);
+		User user = userRepository.findByUsername(username).size()>0?userRepository.findByUsername(username).get(0):null;
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
+				UserLoginTransaction userLoginTransaction = new UserLoginTransaction();
 				String key = getUUID();
-				user.setValidationKey(key);
-				user.setMessage(null);
-				user.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-				userRepository.save(user);
+				userLoginTransaction.setUser(user);
+				userLoginTransaction.setUsername(user.getUsername());
+				userLoginTransaction.setValidationKey(key);
+				userLoginTransaction.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+				userLoginTransactionRepository.save(userLoginTransaction);
 				return key;
 			} else {
 				return "incorrect password";
@@ -55,10 +61,10 @@ public class UserService {
 	}
 
 	public Object logout(String validationKey) {
-		User user = userRepository.findByValidationKey(validationKey);
+		UserLoginTransaction user = userLoginTransactionRepository.findByValidationKey(validationKey);
 		if (user != null) {
 			user.setValidationKey(null);
-			userRepository.save(user);
+			userLoginTransactionRepository.save(user);
 			return "logout success";
 		}
 		return "failed to logout";

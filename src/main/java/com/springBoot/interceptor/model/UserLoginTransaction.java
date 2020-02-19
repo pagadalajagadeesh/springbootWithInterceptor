@@ -3,31 +3,32 @@ package com.springBoot.interceptor.model;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-public class User {
+public class UserLoginTransaction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "username")
-	private String username;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "email")
-	private String email;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userId")
+	private User user;
+	@Column(name = "validationKey")
+	private String validationKey;
 	@Column(name = "createdAt")
 	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
-
-	public User() {
-	}
+	@Column(name = "username")
+	private String username;
 
 	public long getId() {
 		return id;
@@ -37,36 +38,20 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getValidationKey() {
+		return validationKey;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public User(String username, String password, String email) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.email = email;
+	public void setValidationKey(String validationKey) {
+		this.validationKey = validationKey;
 	}
 
 	public Timestamp getUpdatedAt() {
@@ -81,5 +66,12 @@ public class User {
 		return createdAt;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 }

@@ -3,7 +3,7 @@
 		$scope.submitForm = function(){
 			
 			var url = $location.absUrl() + "createUser";
-			
+			debugger
 			var config = {
 	                headers : {
 	                    'Accept': 'application/json'
@@ -17,6 +17,7 @@
 			
 			$http.post(url, data, config).then(function (response) {
 				$scope.postResultMessage = response.data;
+				$scope.formName.$setUntouched()
 			}, function error(response) {
 				$scope.postResultMessage = "Error with status: " +  response.statusText;
 			});
@@ -25,9 +26,10 @@
 		}
 	});
 
-	/*app.controller('getcontroller', function($scope, $http, $location) {
+	app.controller('getcontroller', function($scope, $http, $location) {
 		$scope.getfunction = function(){
-			var url = $location.absUrl() + "quotes";
+			debugger
+			var url = $location.absUrl() + "getUsers?validationKey=3GIV1Z5YWBNFCSSM6KCAG0KUHJIMRIOLRCEUMMYU8GYHG5GIRTROV4CXMNBVBWFI";
 			
 			$http.get(url).then(function (response) {
 				$scope.response = response.data
@@ -35,4 +37,4 @@
 				$scope.postResultMessage = "Error with status: " +  response.statusText;
 			});
 		}
-	});*/
+	});
