@@ -31,8 +31,7 @@ pipeline {
         stage('Docker Build') { 
             steps {
                   echo 'Docker Building...'
-                  echo "docker build -t  pagadalajagadeesh/springboot sbInterceptor-${BUILD_NUMBER}.war"
-                  bat "docker build -t  pagadalajagadeesh/springboot sbInterceptor-${BUILD_NUMBER}.war"
+                  bat "docker build -t  pagadalajagadeesh/springboot ."
             }
         }
          stage('Docker removing old container ') { 
