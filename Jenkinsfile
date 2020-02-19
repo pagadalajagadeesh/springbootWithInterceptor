@@ -1,6 +1,17 @@
 pipeline {
     agent any 
     stages {
+        stage('Old war backup') { 
+            steps {
+                 echo 'Old war backup'
+                try{
+                  bat 'mkdir war'
+                  bat 'move build\\libs\\*.war war\\'
+                } catch(Exception e){
+                  echo 'Exception occurred while removing old container...'
+                }                               
+            }
+        }        
         stage('Git Clone') { 
             steps {
                  echo 'Cloning...'
