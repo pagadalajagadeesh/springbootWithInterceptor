@@ -12,7 +12,7 @@ pipeline {
                   echo 'Gradle Building...'
                   bat 'gradlew build -x test' 
                  echo "You can also use \${BUILD_NUMBER} -> ${BUILD_NUMBER}"
-                  bat "move build\\libs\\sbInterceptor-0.0.1-SNAPSHOT.war build\\libs\\"sbInterceptor-"+${BUILD_NUMBER}.war"
+                  bat "move build\\libs\\sbInterceptor-0.0.1-SNAPSHOT.war build\\libs\\sbInterceptor-${BUILD_NUMBER}.war"
             }
         }
         stage('Docker Build') { 
