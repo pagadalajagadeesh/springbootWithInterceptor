@@ -13,110 +13,119 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link href="<%=request.getContextPath()%>/css/app.css" rel="stylesheet" />
+
+
+<title>Login V4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<link rel="icon" type="image/png"
+	href="<%=request.getContextPath()%>/images/icons/favicon.ico" />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/util.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/main.css">
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/alertify.css">
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+<script
+	src="<%=request.getContextPath()%>/css/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script
+	src="<%=request.getContextPath()%>/css/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="<%=request.getContextPath()%>/css/bootstrap/js/popper.js"></script>
+<script
+	src="<%=request.getContextPath()%>/css/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="<%=request.getContextPath()%>/css/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script
+	src="<%=request.getContextPath()%>/css/daterangepicker/moment.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/css/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script
+	src="<%=request.getContextPath()%>/css/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
 </head>
 <body>
+	<div class="container-login100"
+		style="background-image: url('images/bg-01.jpg');">
+		 <!-- class="container" --> <div ng-app="quoteApp">
 
-	<div class="container" ng-app="quoteApp">
+			<div ng-controller="loginController"
+				class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form" method="post"
+					ng-submit="login()">
+					<span class="login100-form-title p-b-49"> Login </span>
 
-		<h3 style="color: blue">Login</h3>
+					<div class="wrap-input100 validate-input m-b-23"
+						data-validate="Username is reauired">
+						<span class="label-input100">Username</span> <input
+							class="input100" type="text" placeholder="Type your username"
+							name="username" id="username" placeholder="Enter username"
+							ng-model="username"> <span class="focus-input100"
+							data-symbol="&#xf206;"></span>
+					</div>
 
-		<div ng-controller="loginController">
-			<form class="form-horizontal" method="post" name="quoteForm"
-				ng-submit="login()">
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="quote">username
-						: </label>
-					<div class="col-sm-5">
-						<input type="text" class="form-control" name="username"
-							id="username1" placeholder="Enter username" ng-model="username1" />
+					<div class="wrap-input100 validate-input"
+						data-validate="Password is required">
+						<span class="label-input100">Password</span> <input
+							class="input100" type="password" placeholder="Type your password"
+							name="password" id="password" placeholder="Enter password"
+							ng-model="password"> <span class="focus-input100"
+							data-symbol="&#xf190;"></span>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="quote">password
-						: </label>
-					<div class="col-sm-5">
-						<input type="text" class="form-control" name="password"
-							id="password1" placeholder="Enter password" ng-model="password1" />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Submit</button>
-					</div>
-				</div>
-			</form>
-		</div>
 
+					<div class="text-right p-t-8 p-b-31">
+						<a href="#"> Forgot password? </a>
+					</div>
 
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" type="submit">Login</button>
+						</div>
+					</div>
 
-	<h3 style="color: blue">create users</h3>
-		<div ng-controller="postcontroller">
-			<form class="form-horizontal" method="post" name="quoteForm"
-				ng-submit="submitForm()">
-				<!-- <div class="form-group">
-				<label class="control-label col-sm-2" for="quoteId">Id:</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" name="quoteId" id="quoteId"
-						placeholder="1" ng-model="id"/>
-				</div>
-			</div> -->
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="quote">username
-						: </label>
-					<div class="col-sm-5">
-						<input type="text" class="form-control" name="username"
-							id="username" placeholder="Enter username" ng-model="username" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="quote">password
-						: </label>
-					<div class="col-sm-5">
-						<input type="text" class="form-control" name="password"
-							id="password" placeholder="Enter password" ng-model="password" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="quote">email:</label>
-					<div class="col-sm-5">
-						<input type="email" class="form-control" name="email" id="email"
-							placeholder="Enter email" ng-model="email" />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Submit</button>
-					</div>
-				</div>
-			</form>
-
-			<div class="col-sm-offset-2 col-sm-10">
-				<p>{{postResultMessage}}</p>
+				</form>
 			</div>
-		</div>
 
-		<div class="col-sm-offset-2 col-sm-10" ng-controller="getcontroller">
-			<button id="btn-id" type="button" class="btn btn-primary"
-				ng-click="getfunction()">Get All Users</button>
-			<ul>
-				<li ng-repeat="cust in response">{{cust.username + " " +
-					cust.email +" "+cust.createdAt }}</li>
-			</ul>
-		</div>
 
-		<div ng-controller="getcontroller">
-			<button id="btn-id" type="button" class="btn btn-primary"
-				ng-click="getfunction()">Get All Users</button>
-			<table>
-				<tr ng-repeat="cust in response">
-					<td>{{cust.username}}</td>
-					<td>{{ cust.email }}</td>
-					<td>{{ cust.createdAt }}</td>
-				</tr>
-			</table>
 
 		</div>
-
 	</div>
 </body>
 </html>

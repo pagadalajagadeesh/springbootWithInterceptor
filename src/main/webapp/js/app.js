@@ -43,21 +43,23 @@ var app = angular.module('quoteApp', []);
 	
 
 	app.controller('loginController', function($scope, $http, $location) {
-		debugger
 	$scope.login = function() {
 		var url = $location.absUrl()+ "login";
 		var data = {
-			username : $scope.username1,
-			password : $scope.password1
+			username : $scope.username,
+			password : $scope.password
 		};
 		
 		$http.post(url, data).then(function (response) {
 			$scope.postResultMessage = response.data;
 			validationKey=response.data.validationKey;
 			console.log("validationKey is "+validationKey);
-			$scope.formName.$setUntouched()
+//			$scope.formName.$setUntouched()
 		}, function error(response) {
 			$scope.postResultMessage = "Error with status: " +  response.statusText;
+			alertify.alert('Login failed', 'Incorrect username or password...');
+			Run
+			 Overloads
 		});
 	}
 });

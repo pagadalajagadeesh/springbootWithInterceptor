@@ -18,6 +18,9 @@ public interface UserLoginTransactionRepository extends CrudRepository<UserLogin
 	@Query(value = "SELECT * FROM UserLoginTransaction where validationKey is not null and TIMESTAMPDIFF(MINUTE,updatedAt,?1 ) > 10", nativeQuery = true)
 	List<UserLoginTransaction> findUserByUpdatedAt(Timestamp time);
 	
+	@Query(value = "SELECT * FROM UserLoginTransaction where validationKey is not null and userId =?1 ", nativeQuery = true)
+	UserLoginTransaction findUserByValidSession(long userId);
+	
 	default boolean userValidation(UserLoginTransaction users, String key) {
 		User user = findTopByUsername(users.getUsername());
 		if (user != null) {

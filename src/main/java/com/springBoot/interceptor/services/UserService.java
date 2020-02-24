@@ -38,22 +38,28 @@ public class UserService {
 
 	}
 
-	public Object login(String username, String password)  {
+	public Object login(String username, String password) {
 //		User user = userRepository.findTopByUsername(username);
 		List<User> userList = userRepository.findByUsername(username);
-		User user = userList.size()>0?userList.get(0):null;
+		User user = userList.size() > 0 ? userList.get(0) : null;
+		Map<String, String> map = new HashMap<String, String>();
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
-				UserLoginTransaction userLoginTransaction = new UserLoginTransaction();
-				String key = getUUID();
-				userLoginTransaction.setUserId(user.getId());
-				userLoginTransaction.setUsername(user.getUsername());
-				userLoginTransaction.setValidationKey(key);
-				userLoginTransaction.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-				userLoginTransactionRepository.save(userLoginTransaction);
-				Map<String,String> map = new HashMap<String,String>();
-				map.put("validationKey", key);
-				return map;
+				UserLoginTransaction uLT = userLoginTransactionRepository.findUserByValidSession(user.getId());
+				if (uLT == null) {
+					UserLoginTransaction userLoginTransaction = new UserLoginTransaction();
+					String key = getUUID();
+					userLoginTransaction.setUserId(user.getId());
+					userLoginTransaction.setUsername(user.getUsername());
+					userLoginTransaction.setValidationKey(key);
+					userLoginTransaction.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+					userLoginTransactionRepository.save(userLoginTransaction);
+					map.put("validationKey", key);
+					return map;
+				} else {
+					map.put("validationKey", uLT.getValidationKey());
+					return map;
+				}
 			} else {
 				return "incorrect password";
 			}
