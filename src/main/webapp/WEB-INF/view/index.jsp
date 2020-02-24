@@ -15,7 +15,7 @@
 <link href="<%=request.getContextPath()%>/css/app.css" rel="stylesheet" />
 
 
-<title>Login V4</title>
+<title>Login</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -26,10 +26,10 @@
 	href="<%=request.getContextPath()%>/css/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	href="<%=request.getContextPath()%>/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="fonts/iconic/css/material-design-iconic-font.min.css">
+	href="<%=request.getContextPath()%>/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/animate/animate.css">
