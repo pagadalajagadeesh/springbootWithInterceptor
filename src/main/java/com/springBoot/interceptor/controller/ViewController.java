@@ -11,9 +11,12 @@ public class ViewController extends WebMvcConfigurerAdapter {
 
 	@RequestMapping(value = "/")
 	public String index(Model model) {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("message", "hi");
-//		mav.setViewName("index");
 		return "index";
+	}
+	
+	@RequestMapping(value = "/welcome")
+	public String welcome(Model model) {
+		System.out.println("----------------");
+		return "welcome";
 	}
 }

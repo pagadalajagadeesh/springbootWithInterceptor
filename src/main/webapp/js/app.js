@@ -54,7 +54,8 @@ var app = angular.module('quoteApp', []);
 			$scope.postResultMessage = response.data;
 			validationKey=response.data.validationKey;
 			console.log("validationKey is "+validationKey);
-//			$scope.formName.$setUntouched()
+//			$scope.formName.$setUntouched()+
+			window.location=$location.absUrl()+"welcome?validationKey="+validationKey;
 		}, function error(response) {
 			$scope.postResultMessage = "Error with status: " +  response.statusText;
 			alertify.alert('Login failed', 'Incorrect username or password...');
