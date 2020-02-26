@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	UserLoginTransactionRepository userLoginTransactionRepository;
 
@@ -29,8 +29,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String key = request.getParameter("validationKey");
 
-		System.out.println(request.getServletPath());
-		
 		if (request.getServletPath().equals("/login") || request.getServletPath().equals("/logout")) {
 
 			return true;

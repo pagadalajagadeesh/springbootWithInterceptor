@@ -65,6 +65,10 @@ var app = angular.module('quoteApp', []);
 	}
 });
 	
-	
+	app.controller('testDiv', [function() {
+	    angular.element(document).ready(function () {
+	        document.getElementById('msg').innerHTML = 'Hello jagadeesh';
+	    });
+	}]);
 	
 	

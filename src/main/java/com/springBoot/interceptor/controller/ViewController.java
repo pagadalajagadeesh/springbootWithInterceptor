@@ -16,7 +16,6 @@ public class ViewController extends WebMvcConfigurerAdapter {
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome(Model model) {
-		System.out.println("----------------");
 		return "welcome";
 	}
 }
