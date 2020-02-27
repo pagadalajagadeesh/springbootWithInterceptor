@@ -25,7 +25,7 @@ public class ScheduledTasks {
 	public void invalidateSessions() {
 		
 		List<UserLoginTransaction> usersList = userLoginTransactionRepository.findUserByUpdatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
-		System.out.println(usersList.size());
+//		System.out.println(usersList.size());
 		if(usersList.size()>0) {
 			for(UserLoginTransaction user : usersList) {
 				try {

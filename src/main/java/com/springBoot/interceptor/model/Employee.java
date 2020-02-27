@@ -1,5 +1,6 @@
 package com.springBoot.interceptor.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -21,8 +22,12 @@ public class Employee {
 	private String lastName;
 	@Column(name = "mobileNumber")
 	private String mobileNumber;
+	@Column(name = "joiningDate")
+	private Date joiningDate;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "active")
+	private boolean active=true;
 	@Column(name = "createdAt")
 	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	@Column(name = "updatedAt")
@@ -89,6 +94,22 @@ public class Employee {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(Date joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,17 +24,25 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	UserLoginTransactionRepository userLoginTransactionRepository;
-
+	String key = null;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String key = request.getParameter("validationKey");
-
-		if (request.getServletPath().equals("/login") || request.getServletPath().equals("/logout")) {
+		key = request.getParameter("validationKey");
+		if (key == null) {
+			key = (String) request.getAttribute("validationKey");
+		}
+		HttpSession session = request.getSession(true);
+		if (key == null) {
+			key = (String) session.getAttribute("validationKey");
+		}
+		System.out.println(key);
+		System.out.println(request.getServletPath());
+		if (request.getServletPath().equals("/login") || request.getServletPath().equals("/logout")|| request.getServletPath().equals("/error")) {
 
 			return true;
 		}
-		UserLoginTransaction user = userLoginTransactionRepository.findByValidationKey(key);
+		UserLoginTransaction user = userLoginTransactionRepository.findByValidationKey(key.substring(0, 64));
 		if (user != null) {
 			user.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			userLoginTransactionRepository.save(user);
@@ -47,6 +56,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		request.setAttribute("validationKey", key);
+		request.getSession(true).setAttribute("validationKey", key);
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 
 	}

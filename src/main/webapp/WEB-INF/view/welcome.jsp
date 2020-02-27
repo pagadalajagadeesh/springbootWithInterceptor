@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="javax.servlet.*"%>
 <!DOCTYPE HTML>
@@ -78,6 +78,7 @@
 	src="<%=request.getContextPath()%>/css/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 <script src="<%=request.getContextPath()%>/js/main.js"></script>
+<script src="<%=request.getContextPath()%>/js/welcome.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -110,41 +111,46 @@
 <script
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 </head>
-<body >
+<body ng-app="wApp" >
 	<!-- class="container-login100" style="background-image: url('images/bg-01.jpg');"> -->
-	<div ng-controller="testDiv">
 		<div id="contact"><button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#contact-modal">Show Contact Form</button></div>
 <div id="contact-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<a class="close" data-dismiss="modal">×</a>
-				<h3>Contact Form</h3>
+		<div class="modal-content" >
+			<div class="modal-header" style="background-color: #cccccc;">
+				<h3 style="margin-left: 37%;" >Register</h3>
 			</div>
-			<form id="contactForm" name="contact" role="form">
+			<form ng-submit="submit()" id="registerEmployeeForm" ng-controller="registerEmployeeController">
 				<div class="modal-body">				
 					<div class="form-group">
-						<label for="name">Name</label>
-						<input type="text" name="name" class="form-control">
+						<label for="name">First name:</label>
+						<input type="text" name="firstName" ng-model="firstName"  id="firstName"  class="form-control">
 					</div>
 					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="email" name="email" class="form-control">
+						<label for="name">Last name:</label>
+						<input type="text" name="lastName" ng-model="lastName"  id="lastName"  class="form-control">
 					</div>
 					<div class="form-group">
-						<label for="message">Message</label>
-						<textarea name="message" class="form-control"></textarea>
+						<label for="name">Mobile Number:</label>
+						<input type="text" name="mobileNumber" ng-model="mobileNumber"  id="mobileNumber"  class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input type="email" name="email" id="email"  ng-model="email" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="message">Joining Date:</label>
+						<input type="date" name="joiningDate" id="joiningDate" ng-model="joiningDate" class="form-control">
 					</div>					
 				</div>
 				<div class="modal-footer">					
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<input type="submit" class="btn btn-success" id="submit">
+					<button type="button" class="btn btn-default" id="closeModal" data-dismiss="modal">Close</button>
+					 <button type="submit" class="btn btn-success">Register</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-	</div>
 	<div style=" width: 90%; margin-left: 5%;">
 		<table id="example" class="table table-striped table-bordered">
 			<thead>
@@ -179,14 +185,14 @@
 						text += '</tbody>';
 						$('#example').append(text);
 						$('#example').DataTable({
-							"bLengthChange": false,
-							dom: 'Bfrtip',
+							"bLengthChange": false
+							/* dom: 'Bfrtip',
 					        buttons: [
 					        	 'copyHtml5',
 					             'excelHtml5',
 					             'csvHtml5',
 					             'pdfHtml5'
-					        ]
+					        ] */
 							});
 					}
 				});
