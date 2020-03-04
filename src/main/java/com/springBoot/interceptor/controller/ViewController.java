@@ -18,4 +18,9 @@ public class ViewController extends WebMvcConfigurerAdapter {
 	public String welcome(Model model) {
 		return "welcome";
 	}
+	
+	@RequestMapping(value = "/masterData")
+	public String masterData(Model model) {
+		return "masterData";
+	}
 }

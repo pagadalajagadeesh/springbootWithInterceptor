@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springBoot.interceptor.model.User;
 import com.springBoot.interceptor.model.UserLoginTransaction;
+import com.springBoot.interceptor.repository.MasterDataRepository;
 import com.springBoot.interceptor.services.EmployeeService;
 import com.springBoot.interceptor.services.UserService;
 
@@ -39,5 +40,7 @@ public class UserController {
 	public Object getUsers() {
 		return userService.getUsers();
 	}
+	
+	
 	
 }

@@ -111,94 +111,50 @@
 <script
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 </head>
-<body ng-app="wApp" >
-	<!-- class="container-login100" style="background-image: url('images/bg-01.jpg');"> -->
-		<div id="contact"><button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#contact-modal">Show Contact Form</button></div>
-<div id="contact-modal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content" >
-			<div class="modal-header" style="background-color: #cccccc;">
-				<h3 style="margin-left: 37%;" >Register</h3>
-			</div>
-			<form ng-submit="submit()" id="registerEmployeeForm" ng-controller="registerEmployeeController">
+<body >
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <form  id="saveMasterData"  action="saveMasterData?validationKey=<%=validationKey%>" >
 				<div class="modal-body">				
 					<div class="form-group">
-						<label for="name">First name:</label>
-						<input type="text" name="firstName" ng-model="firstName"  id="firstName"  class="form-control">
+						<label for="name">Name:</label>
+						<input type="text" name="name" ng-model="name"  id="name"  class="form-control">
 					</div>
 					<div class="form-group">
-						<label for="name">Last name:</label>
-						<input type="text" name="lastName" ng-model="lastName"  id="lastName"  class="form-control">
+						<label for="name">Cost :</label>
+						<input type="number" name="cost" ng-model="cost"  id="cost"  class="form-control">
 					</div>
-					<div class="form-group">
-						<label for="name">Mobile Number:</label>
-						<input type="text" name="mobileNumber" ng-model="mobileNumber"  id="mobileNumber"  class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="email" name="email" id="email"  ng-model="email" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="message">Joining Date:</label>
-						<input type="date" name="joiningDate" id="joiningDate" ng-model="joiningDate" class="form-control">
-					</div>					
 				</div>
 				<div class="modal-footer">					
-					<button type="button" class="btn btn-default" id="closeModal" data-dismiss="modal">Close</button>
-					 <button type="submit" class="btn btn-success">Register</button>
+					<button type="reset" class="btn btn-default"  data-dismiss="modal">Reset</button>
+					 <button type="button" id="saveMasterData" class="btn btn-success">Save</button>
 				</div>
 			</form>
-		</div>
-	</div>
+    </div>
+    <div class="col-sm-8">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor..</p>
+    </div>
+  </div>
 </div>
-	<div style=" width: 90%; margin-left: 5%;">
-		<table id="example" class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>FirstName</th>
-					<th>LastName</th>
-					<th>Mobile Number</th>
-					<th>eMail</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
 </body>
 <script>
-	$(document).ready(
-			function() {
-				var text = '<tbody>';
-				$.ajax({
-					type : 'GET',
-					url : "getEmployees?validationKey="
-							+ new URLSearchParams(window.location.search)
-									.get('validationKey'),
-					success : function(data) {
-						jQuery.each(data, function(index, item) {
-							text += '<tr><td>' + item.id + '</td><td>'
-									+ item.firstName + '</td><td>'
-									+ item.lastName + '</td><td>'
-									+ item.mobileNumber + '</td><td>'
-									+ item.email + '</td></tr>';
-						});
-						text += '</tbody>';
-						$('#example').append(text);
-						$('#example').DataTable({
-							"bLengthChange": false
-							/* dom: 'Bfrtip',
-					        buttons: [
-					        	 'copyHtml5',
-					             'excelHtml5',
-					             'csvHtml5',
-					             'pdfHtml5'
-					        ] */
-							});
-					}
-				});
+$('#saveMasterData').click( function() {
 
-				//
-
-			});
+var data ={};
+data.name=$('#name').val()
+data.cost=$('#cost').val()
+	
+    $.ajax({
+        url: 'saveMasterData?validationKey=<%=validationKey%>',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        success: function(data) {
+                   // ... do something with the data...
+                 }
+    });
+});
 </script>
 </html>
