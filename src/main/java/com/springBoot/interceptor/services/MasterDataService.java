@@ -1,6 +1,8 @@
 package com.springBoot.interceptor.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.springBoot.interceptor.model.MasterData;
@@ -13,7 +15,8 @@ public class MasterDataService {
 	MasterDataRepository masterDataRepository;
 
 	public Object saveMasterData(MasterData masterData) {
-		return masterDataRepository.save(masterData);
+		 masterDataRepository.save(masterData);
+		 return new ResponseEntity<>("Success", HttpStatus.OK);
 	}
 	
 	

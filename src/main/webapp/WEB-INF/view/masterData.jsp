@@ -127,8 +127,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">					
-					<button type="reset" class="btn btn-default"  data-dismiss="modal">Reset</button>
-					 <button type="button" id="saveMasterData" class="btn btn-success">Save</button>
+					<button type="reset" class="btn btn-danger"  >Reset</button>
+					 <button type="button" id="submitMasterData" class="btn btn-success">Save</button>
 				</div>
 			</form>
     </div>
@@ -140,21 +140,26 @@
 </div>
 </body>
 <script>
-$('#saveMasterData').click( function() {
-
+$('#submitMasterData').click( function() {
+debugger
 var data ={};
 data.name=$('#name').val()
 data.cost=$('#cost').val()
 	
     $.ajax({
-        url: 'saveMasterData?validationKey=<%=validationKey%>',
-        type: 'post',
-        dataType: 'json',
+        url: "saveMasterData?validationKey=<%=validationKey%>&name=data.name&cost=data.cost",
+        type: 'POST',
+        contentType: "application/json",
+        processData: false,
         data: data,
         success: function(data) {
-                   // ... do something with the data...
-                 }
+                debugger
+                 },
+        error: function (jqXHR, status, err) {
+        	debugger
+          },
     });
+
 });
 </script>
 </html>

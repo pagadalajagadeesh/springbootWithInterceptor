@@ -21,7 +21,7 @@ import com.springBoot.interceptor.services.EmployeeService;
 import com.springBoot.interceptor.services.UserService;
 
 @RestController
-public class LoginController implements ErrorController {
+public class LoginController  {
 
 	@Autowired
 	EmployeeService employeeService;
@@ -66,21 +66,6 @@ public class LoginController implements ErrorController {
 	@RequestMapping(value = "/getEmployees", method = RequestMethod.GET)
 	public Object getEmployees() {
 		return employeeService.getEmployees();
-	}
-
-	@RequestMapping("/error")
-	public String handleError(HttpServletRequest request) {
-		Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-		Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
-		return String.format(
-				"<html><body><h2>Error Page</h2><div>Status code: <b>%s</b></div>"
-						+ "<div>Exception Message: <b>%s</b></div><body></html>",
-				statusCode, exception == null ? "N/A" : exception.getMessage());
-	}
-
-	@Override
-	public String getErrorPath() {
-		return "/error";
 	}
 
 }

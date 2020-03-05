@@ -25,6 +25,16 @@ public class MasterData {
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
+	public MasterData() {
+		super();
+	}
+
+	public MasterData(String name, double cost) {
+		super();
+		this.name = name;
+		this.cost = cost;
+	}
+
 	public long getId() {
 		return id;
 	}
