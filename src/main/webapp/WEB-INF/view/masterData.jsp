@@ -79,6 +79,7 @@
 <!--===============================================================================================-->
 <script src="<%=request.getContextPath()%>/js/main.js"></script>
 <script src="<%=request.getContextPath()%>/js/welcome.js"></script>
+<script src="<%=request.getContextPath()%>/js/masterData.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -111,55 +112,73 @@
 <script
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 </head>
-<body >
-<div class="container">
+<body ng-app="masterDataApp" >
+<div class="container" class="h-65 d-inline-block">
   <div class="row">
     <div class="col-sm-4">
-      <form  id="saveMasterData"  action="saveMasterData?validationKey=<%=validationKey%>" >
+      <form ng-controller="submitMasterDataController"  id="saveMasterData"   ng-submit="saveMasterData()" >
 				<div class="modal-body">				
 					<div class="form-group">
 						<label for="name">Name:</label>
-						<input type="text" name="name" ng-model="name"  id="name"  class="form-control">
+						<input type="text" name="name" required="required" ng-model="name"  id="name"  class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="name">Cost :</label>
-						<input type="number" name="cost" ng-model="cost"  id="cost"  class="form-control">
+						<input type="number" name="cost" required="required" ng-model="cost"  id="cost"  class="form-control">
 					</div>
 				</div>
 				<div class="modal-footer">					
 					<button type="reset" class="btn btn-danger"  >Reset</button>
-					 <button type="button" id="submitMasterData" class="btn btn-success">Save</button>
+					 <button type="submit" id="submitMasterData" class="btn btn-success">Save</button>
 				</div>
 			</form>
     </div>
     <div class="col-sm-8">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor..</p>
+      <table id="masterDataTable" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Product Name</th>
+					<th>Cost</th>
+				</tr>
+			</thead>
+		</table>
     </div>
   </div>
 </div>
 </body>
 <script>
-$('#submitMasterData').click( function() {
-debugger
-var data ={};
-data.name=$('#name').val()
-data.cost=$('#cost').val()
-	
-    $.ajax({
-        url: "saveMasterData?validationKey=<%=validationKey%>&name=data.name&cost=data.cost",
-        type: 'POST',
-        contentType: "application/json",
-        processData: false,
-        data: data,
-        success: function(data) {
-                debugger
-                 },
-        error: function (jqXHR, status, err) {
-        	debugger
-          },
-    });
+	$(document).ready(
+			function() {
+				var text = '<tbody>';
+				$.ajax({
+					type : 'GET',
+					url : "getMasterData?validationKey="
+							+ new URLSearchParams(window.location.search)
+									.get('validationKey'),
+					success : function(data) {
+						jQuery.each(data, function(index, item) {
+							text += '<tr><td>' + item.id + '</td><td>'
+									+ item.name + '</td><td>'
+									+ item.cost + '</td></tr>';
+						});
+						text += '</tbody>';
+						$('#masterDataTable').append(text);
+						$('#masterDataTable').DataTable({
+							"bLengthChange": false
+							/* dom: 'Bfrtip',
+					        buttons: [
+					        	 'copyHtml5',
+					             'excelHtml5',
+					             'csvHtml5',
+					             'pdfHtml5'
+					        ] */
+							});
+					}
+				});
 
-});
+				//
+
+			});
 </script>
 </html>

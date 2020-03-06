@@ -18,6 +18,10 @@ public class MasterDataService {
 		 masterDataRepository.save(masterData);
 		 return new ResponseEntity<>("Success", HttpStatus.OK);
 	}
+
+	public Object getMasterData() {
+		return masterDataRepository.findAll();
+	}
 	
 	
 	

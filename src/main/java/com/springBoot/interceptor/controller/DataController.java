@@ -20,12 +20,15 @@ public class DataController {
 	MasterDataService masterDataService;
 	
 	@RequestMapping(value = "/saveMasterData", method = RequestMethod.POST)
-	public Object saveMasterData(@RequestParam String name, @RequestParam double cost) {
-		return masterDataService.saveMasterData(new MasterData(name,cost));
+	public Object saveMasterData(@RequestBody MasterData masterData) {
+		return masterDataService.saveMasterData(masterData);
 	}
 	
 	
-
+	@RequestMapping(value = "/getMasterData", method = RequestMethod.GET)
+	public Object getMasterData() {
+		return masterDataService.getMasterData();
+	}
 	
 	
 }
