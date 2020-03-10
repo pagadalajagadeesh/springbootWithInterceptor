@@ -1,5 +1,7 @@
 package com.springBoot.interceptor.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,19 @@ public class MasterDataService {
 
 	public Object getMasterData() {
 		return masterDataRepository.findAll();
+	}
+
+	public Object disableMasterData(long id) {
+		Optional<?> data = masterDataRepository.findById(id);
+		MasterData masterData=(MasterData) data.get();
+		masterData.setActive(false);
+		masterDataRepository.save(masterData);
+		return  new ResponseEntity<>("Success", HttpStatus.OK);
+	}
+
+	public Object enableMasterData(long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

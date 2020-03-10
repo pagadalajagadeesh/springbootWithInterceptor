@@ -17,7 +17,7 @@ public class MasterData {
 	@Column(name = "name")
 	private String name;
 	@Column(name = "active")
-	private boolean active = true;
+	private Boolean active = true;
 	@Column(name = "cost")
 	private double cost;
 	@Column(name = "createdAt")

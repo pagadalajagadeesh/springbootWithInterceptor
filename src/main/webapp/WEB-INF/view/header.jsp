@@ -69,8 +69,8 @@ body {
 	<div class="header">
 		<a href="#default" class="logo">***</a>
 		<div class="header-right">
-			<a class="active" href="#home">Home</a> 
-			<a class="${pageContext.request.requestURI eq 'path/masterData*' ? ' active' : ''}" href="masterData?validationKey=<%=validationKey%>">Master Data</a>
+			<a href="welcome?validationKey=<%=validationKey%>" class="active" href="#home">Home</a> 
+			<a href="masterData?validationKey=<%=validationKey%>">Master Data</a>
 			<a href="#about">About</a>
 		</div>
 	</div>

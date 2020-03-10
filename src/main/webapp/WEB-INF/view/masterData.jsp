@@ -140,6 +140,7 @@
 					<th>ID</th>
 					<th>Product Name</th>
 					<th>Cost</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 		</table>
@@ -160,7 +161,12 @@
 						jQuery.each(data, function(index, item) {
 							text += '<tr><td>' + item.id + '</td><td>'
 									+ item.name + '</td><td>'
-									+ item.cost + '</td></tr>';
+									+ item.cost + '</td>';
+							if(item.active){
+								text +='<td><button type=\"button\" onclick=disableMe('+ item.id +')  class=\"btn btn-danger disable\">Disable</button></td></tr>'
+							}else{
+								text +='<td><button type=\"button\" onclick=enableMe('+ item.id +') class=\"btn btn-success enable\">Enable</button></td></tr>'
+							}
 						});
 						text += '</tbody>';
 						$('#masterDataTable').append(text);
@@ -176,9 +182,29 @@
 							});
 					}
 				});
-
-				//
-
 			});
+
+	
+
+
+
+	function disableMe(id) {
+		var data={}
+		data.id=id;
+		$.ajax({
+		      type: 'PUT',
+		      url: "disableMasterData?id="+id+"&validationKey="+ new URLSearchParams(window.location.search).get('validationKey'),
+		      success: function(resultData) {
+		    	  location.reload();
+			       },
+			       error: function(resultData) {
+
+				    alert(resultData); }
+		});
+	}
+
+	function enableMe(id) {
+
+	}
 </script>
 </html>
