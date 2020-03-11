@@ -28,36 +28,32 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		key = request.getParameter("validationKey");
-		if (key == null) {
-			key = (String) request.getAttribute("validationKey");
-		}
-		HttpSession session = request.getSession(true);
-		if (key == null) {
-			key = (String) session.getAttribute("validationKey");
-		}
-		System.out.println(key);
-		System.out.println(request.getServletPath());
-		if (request.getServletPath().equals("/login") || request.getServletPath().equals("/logout")|| request.getServletPath().equals("/error")) {
-
-			return true;
-		}
-		UserLoginTransaction user = userLoginTransactionRepository.findByValidationKey(key.substring(0, 64));
-		if (user != null) {
-			user.setUpdatedAt(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-			userLoginTransactionRepository.save(user);
-			return true;
-		} else {
-			response.getWriter().write("user not found or session may expired");
-			return false;
-		}
+		return true;
+		/*
+		 * key = request.getParameter("validationKey"); if (key == null) { key =
+		 * (String) request.getAttribute("validationKey"); } HttpSession session =
+		 * request.getSession(true); if (key == null) { key = (String)
+		 * session.getAttribute("validationKey"); } System.out.println(key);
+		 * System.out.println(request.getServletPath()); if
+		 * (request.getServletPath().equals("/login") ||
+		 * request.getServletPath().equals("/logout")||
+		 * request.getServletPath().equals("/error")) {
+		 * 
+		 * return true; } UserLoginTransaction user =
+		 * userLoginTransactionRepository.findByValidationKey(key.substring(0, 64)); if
+		 * (user != null) { user.setUpdatedAt(new
+		 * Timestamp(Calendar.getInstance().getTimeInMillis()));
+		 * userLoginTransactionRepository.save(user); return true; } else {
+		 * response.getWriter().write("user not found or session may expired"); return
+		 * false; }
+		 */
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		request.setAttribute("validationKey", key);
-		request.getSession(true).setAttribute("validationKey", key);
+//		request.setAttribute("validationKey", key);
+//		request.getSession(true).setAttribute("validationKey", key);
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 
 	}

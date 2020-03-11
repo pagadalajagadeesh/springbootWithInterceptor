@@ -28,13 +28,13 @@ public class DataController {
 		return masterDataService.getMasterData();
 	}
 	
-	@RequestMapping(value = "/disableMasterData/{id}", method = RequestMethod.PUT )
+	@RequestMapping(value = "/disableMasterData/{id}" , method = RequestMethod.PUT)
 	public Object disableMasterData(@PathVariable long id) {
 		return masterDataService.disableMasterData(id);
 	}
 	
-	@RequestMapping(value = "/enableMasterData", method = RequestMethod.POST)
-	public Object enableMasterData(@RequestBody Data data) {
-		return masterDataService.enableMasterData(data.getId());
+	@RequestMapping(value = "/enableMasterData/{id}", method = RequestMethod.PUT)
+	public Object enableMasterData(@PathVariable long id) {
+		return masterDataService.enableMasterData(id);
 	}
 }

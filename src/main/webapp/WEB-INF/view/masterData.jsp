@@ -193,7 +193,7 @@
 		data.id=id;
 		$.ajax({
 		      type: 'PUT',
-		      url: "disableMasterData?id="+id+"&validationKey="+ new URLSearchParams(window.location.search).get('validationKey'),
+		      url: "disableMasterData/"+id,
 		      success: function(resultData) {
 		    	  location.reload();
 			       },
@@ -204,7 +204,20 @@
 	}
 
 	function enableMe(id) {
+		var data={}
+		data.id=id;
+ 		$.ajax({
+		      type: 'PUT',
+		      url: "enableMasterData/"+id,
+		      success: function(resultData) {
+		    	  location.reload();
+			       },
+			       error: function(resultData) {
 
+				    alert(resultData); }
+		}); 
+
+		
 	}
 </script>
 </html>

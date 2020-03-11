@@ -34,8 +34,11 @@ public class MasterDataService {
 	}
 
 	public Object enableMasterData(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<?> data = masterDataRepository.findById(id);
+		MasterData masterData=(MasterData) data.get();
+		masterData.setActive(true);
+		masterDataRepository.save(masterData);
+		return  new ResponseEntity<>("Success", HttpStatus.OK);
 	}
 	
 	

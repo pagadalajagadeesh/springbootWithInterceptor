@@ -20,7 +20,7 @@ public class ScheduledTasks {
 	@Autowired
 	UserLoginTransactionRepository userLoginTransactionRepository;
 	
-	@Scheduled(fixedRate = 500000)
+//	@Scheduled(fixedRate = 500000)
 //	@Scheduled(fixedRate = 5000)
 	public void invalidateSessions() {
 		
