@@ -5,10 +5,10 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.springBoot.interceptor.model.Employee;
+import com.springBoot.interceptor.model.Customer;
 
 //@Repository
-public interface EmployeeRepository  extends CrudRepository<Employee, Long>{
+public interface CustomerRepository  extends CrudRepository<Customer, Long>{
 	
 	
 }

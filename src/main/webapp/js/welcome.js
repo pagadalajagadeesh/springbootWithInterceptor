@@ -21,6 +21,7 @@ welcome.controller('registerEmployeeController', function($scope, $http,
 		data.mobileNumber = $scope.mobileNumber;
 		data.email = $scope.email;
 		data.joiningDate = $scope.joiningDate;
+		//data.masterDataId = $scope.item;
 		$http.post(url, data, config).then(
 				function(response) {
 					$scope.postResultMessage = response.data;

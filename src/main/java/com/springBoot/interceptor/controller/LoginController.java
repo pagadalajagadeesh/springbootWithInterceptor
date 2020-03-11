@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springBoot.interceptor.model.Employee;
+import com.springBoot.interceptor.model.Customer;
 import com.springBoot.interceptor.model.Product;
 import com.springBoot.interceptor.model.User;
-import com.springBoot.interceptor.services.EmployeeService;
+import com.springBoot.interceptor.services.CustomerService;
 import com.springBoot.interceptor.services.UserService;
 
 @RestController
 public class LoginController  {
 
 	@Autowired
-	EmployeeService employeeService;
+	CustomerService employeeService;
 
 	@Autowired
 	UserService userService;
@@ -49,17 +49,17 @@ public class LoginController  {
 	
 
 	@RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
-	public Object saveEmployee(@RequestBody Employee employee) {
+	public Object saveEmployee(@RequestBody Customer employee) {
 		return employeeService.saveEmployee(employee);
 	}
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
-	public Object updateEmployee(@RequestBody Employee employee) {
+	public Object updateEmployee(@RequestBody Customer employee) {
 		return employeeService.updateEmployee(employee);
 	}
 
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.DELETE)
-	public Object deleteEmployee(@RequestBody Employee employee) {
+	public Object deleteEmployee(@RequestBody Customer employee) {
 		return employeeService.deleteEmployee(employee);
 	}
 

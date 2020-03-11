@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springBoot.interceptor.model.User;
 import com.springBoot.interceptor.model.UserLoginTransaction;
 import com.springBoot.interceptor.repository.MasterDataRepository;
-import com.springBoot.interceptor.services.EmployeeService;
+import com.springBoot.interceptor.services.CustomerService;
 import com.springBoot.interceptor.services.UserService;
 
 @RestController
 public class UserController {
 
 	@Autowired
-	EmployeeService employeeService;
+	CustomerService employeeService;
 
 	@Autowired
 	UserService userService;

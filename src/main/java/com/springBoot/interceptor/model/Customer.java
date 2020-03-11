@@ -9,9 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
-public class Employee {
+public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,16 +30,16 @@ public class Employee {
 	@Column(name = "email")
 	private String email;
 	@Column(name = "active")
-	private boolean active=true;
+	private boolean active = true;
 	@Column(name = "createdAt")
 	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
-
-	public Employee() {
+	
+	public Customer() {
 	}
 
-	public Employee(String firstName, String lastName, String mobileNumber, String email) {
+	public Customer(String firstName, String lastName, String mobileNumber, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

@@ -25,6 +25,7 @@ public class MasterData {
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
+
 	public MasterData() {
 		super();
 	}

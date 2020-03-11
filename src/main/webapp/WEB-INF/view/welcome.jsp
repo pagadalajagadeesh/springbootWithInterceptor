@@ -113,12 +113,12 @@
 </head>
 <body ng-app="wApp" >
 	<!-- class="container-login100" style="background-image: url('images/bg-01.jpg');"> -->
-		<div id="contact"><button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#contact-modal">Show Contact Form</button></div>
+		<div id="contact"><button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#contact-modal">Show Customer Form</button></div>
 <div id="contact-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content" >
 			<div class="modal-header" style="background-color: #cccccc;">
-				<h3 style="margin-left: 37%;" >Register</h3>
+				<h3 style="margin-left: 37%;" >Register Customer</h3>
 			</div>
 			<form ng-submit="submit()" id="registerEmployeeForm" ng-controller="registerEmployeeController">
 				<div class="modal-body">				
@@ -138,6 +138,12 @@
 						<label for="email">Email:</label>
 						<input type="email" name="email" id="email"  ng-model="email" class="form-control">
 					</div>
+					<!-- <div  class="form-group">
+					<label for="Item">Item:</label>
+						<select id="item" name="Item"  ng-model="item" class="form-control">
+								<option value="s">Select</option>
+						</select>
+					</div> -->
 					<div class="form-group">
 						<label for="message">Joining Date:</label>
 						<input type="date" name="joiningDate" id="joiningDate" ng-model="joiningDate" class="form-control">
@@ -200,5 +206,31 @@
 				//
 
 			});
+
+	$(document).ready( function() {
+		
+		$('#item').empty().append('<option>select</option>');        
+	    $.ajax({
+	            url: 'getMasterData?validationKey='+ new URLSearchParams(window.location.search).get('validationKey'),
+	            dataType: 'json',
+	            type: 'GET',
+	            success: function(response) {
+	              var array = response;
+	              if (array != '')
+	              {
+	                for (i in array) {                        
+	                 $("#item").append("<option value="+array[i].id+">"+array[i].name+"</option>");
+	               }
+
+	              }
+
+	            },
+	            error: function(x, e) {
+
+	            }
+
+	        });
+
+	});
 </script>
 </html>
