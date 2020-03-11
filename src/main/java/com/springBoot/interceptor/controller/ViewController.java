@@ -23,4 +23,9 @@ public class ViewController extends WebMvcConfigurerAdapter {
 	public String masterData(Model model) {
 		return "masterData";
 	}
+	
+	@RequestMapping(value = "/customerTransactions")
+	public String customerTransactions(Model model) {
+		return "customerTransactions";
+	}
 }

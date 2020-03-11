@@ -5,6 +5,8 @@
 <html>
 <head>
 <title>Jagdi</title>
+<script
+	src="<%=request.getContextPath()%>/css/jquery/jquery-3.2.1.min.js"></script>
 <meta charset="ISO-8859-1">
 <style>
 * {
@@ -68,11 +70,23 @@ body {
 <body>
 	<div class="header">
 		<a href="#default" class="logo">***</a>
-		<div class="header-right">
-			<a href="welcome?validationKey=<%=validationKey%>" class="active" href="#home">Home</a> 
-			<a href="masterData?validationKey=<%=validationKey%>">Master Data</a>
-			<a href="#about">About</a>
+		<div class="header-right" id="menu">
+			<a data="welcome" href="welcome?validationKey=<%=validationKey%>"  href="#home">Home</a> 
+			<a data="masterData" href="masterData?validationKey=<%=validationKey%>">Master Data</a>
+			<a data="customerTransactions" href="customerTransactions?validationKey=<%=validationKey%>">Customer Transactions</a>
+			<a data="about" href="#about">About</a>
 		</div>
 	</div>
 </body>
+<script>
+$(document).ready(function() {
+	
+	$('#menu').find('a').each(function(e) {
+		  if(document.URL.split('/')[4].substring(0,document.URL.split('/')[4].indexOf("?"))==$(this).attr('href').substring(0,$(this).attr('href').indexOf("?"))){
+			  $(this).addClass("active");
+			  }
+	  //  console.log($(this).attr('href'));
+	});
+})
+</script>
 </html>

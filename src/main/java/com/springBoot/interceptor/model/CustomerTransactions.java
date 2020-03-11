@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
 @Entity
@@ -21,14 +22,14 @@ public class CustomerTransactions {
 	private long id;
 
 	@ManyToOne
-	@JoinColumn(name = "masterData_id")
+	@JoinColumn(name = "masterDataId")
 	private MasterData masterData;
 	
 	@Transient
 	private long masterDataId;
 
 	@ManyToOne
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "customerId")
 	private Customer customer;
 	
 	@Transient
