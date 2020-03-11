@@ -193,7 +193,7 @@
 		data.id=id;
 		$.ajax({
 		      type: 'PUT',
-		      url: "disableMasterData/"+id,
+		      url: "disableMasterData/"+id+'?validationKey='+ new URLSearchParams(window.location.search).get('validationKey'),
 		      success: function(resultData) {
 		    	  location.reload();
 			       },
@@ -208,7 +208,7 @@
 		data.id=id;
  		$.ajax({
 		      type: 'PUT',
-		      url: "enableMasterData/"+id,
+		      url: "enableMasterData/"+id+'?validationKey='+ new URLSearchParams(window.location.search).get('validationKey'),
 		      success: function(resultData) {
 		    	  location.reload();
 			       },
