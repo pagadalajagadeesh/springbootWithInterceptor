@@ -1,5 +1,6 @@
 package com.springBoot.interceptor.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -9,22 +10,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-public class MasterData {
+public class MasterData implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "name")
-	private String name;
+
 	@Column(name = "active")
-	private Boolean active = true;
-	@Column(name = "cost")
-	private double cost;
+	private boolean active = true;
 	@Column(name = "createdAt")
 	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	@Column(name = "updatedAt")
 	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "cost")
+	private double cost;
 
 	public MasterData() {
 		super();
@@ -36,20 +46,28 @@ public class MasterData {
 		this.cost = cost;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = StringUtils.capitalize(name);
+	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public boolean isActive() {
@@ -70,14 +88,6 @@ public class MasterData {
 
 	public Timestamp getCreatedAt() {
 		return createdAt;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
 	}
 
 }

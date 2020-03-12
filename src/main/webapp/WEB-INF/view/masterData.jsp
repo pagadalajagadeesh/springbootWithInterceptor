@@ -154,7 +154,7 @@
 				var text = '<tbody>';
 				$.ajax({
 					type : 'GET',
-					url : "getMasterData?validationKey="
+					url : "getAllMasterData?validationKey="
 							+ new URLSearchParams(window.location.search)
 									.get('validationKey'),
 					success : function(data) {

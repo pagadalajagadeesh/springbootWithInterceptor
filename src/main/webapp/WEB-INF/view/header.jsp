@@ -74,7 +74,7 @@ body {
 			<a data="welcome" href="welcome?validationKey=<%=validationKey%>"  href="#home">Home</a> 
 			<a data="masterData" href="masterData?validationKey=<%=validationKey%>">Master Data</a>
 			<a data="customerTransactions" href="customerTransactions?validationKey=<%=validationKey%>">Customer Transactions</a>
-			<a data="about" href="#about">About</a>
+			<a data="logout" href="logout?validationKey=<%=validationKey%>">logout</a>
 		</div>
 	</div>
 </body>

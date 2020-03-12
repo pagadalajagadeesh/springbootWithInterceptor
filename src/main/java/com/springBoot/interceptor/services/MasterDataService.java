@@ -22,7 +22,7 @@ public class MasterDataService {
 	}
 
 	public Object getMasterData() {
-		return masterDataRepository.findAll();
+		return masterDataRepository.getMasterData();
 	}
 
 	public Object disableMasterData(long id) {
@@ -39,6 +39,10 @@ public class MasterDataService {
 		masterData.setActive(true);
 		masterDataRepository.save(masterData);
 		return  new ResponseEntity<>("Success", HttpStatus.OK);
+	}
+
+	public Object getAllMasterData() {
+		return masterDataRepository.findAll();
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.springBoot.interceptor.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -10,31 +11,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	@Column(name = "active")
+	private boolean active = true;
+	@Column(name = "createdAt")
+	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
+	@Column(name = "updatedAt")
+	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
+
 	@Column(name = "username")
 	private String username;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "email")
 	private String email;
-	@Column(name = "createdAt")
-	private Timestamp createdAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
-	@Column(name = "updatedAt")
-	private Timestamp updatedAt = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
 	public User() {
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
@@ -61,12 +60,27 @@ public class User {
 		this.email = email;
 	}
 
-
 	public User(String username, String password, String email) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public Timestamp getUpdatedAt() {
@@ -80,6 +94,5 @@ public class User {
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
-
 
 }

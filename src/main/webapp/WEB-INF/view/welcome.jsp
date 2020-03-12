@@ -110,6 +110,7 @@
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 <script
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/date-dd-MMM-yyyy.js"></script>
 </head>
 <body ng-app="wApp" >
 	<!-- class="container-login100" style="background-image: url('images/bg-01.jpg');"> -->
@@ -118,13 +119,13 @@
 	<div class="modal-dialog">
 		<div class="modal-content" >
 			<div class="modal-header" style="background-color: #cccccc;">
-				<h3 style="margin-left: 37%;" >Register Customer</h3>
+				<h3 style="margin-left: 25%;" >Register Customer</h3>
 			</div>
 			<form ng-submit="submit()" id="registerEmployeeForm" ng-controller="registerEmployeeController">
 				<div class="modal-body">				
 					<div class="form-group">
 						<label for="name">First name:</label>
-						<input type="text" name="firstName" ng-model="firstName"  id="firstName"  class="form-control">
+						<input type="text" name="firstName" ng-model="firstName" required="required" id="firstName"  class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="name">Last name:</label>
@@ -132,21 +133,19 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Mobile Number:</label>
-						<input type="text" name="mobileNumber" ng-model="mobileNumber"  id="mobileNumber"  class="form-control">
+						<input type="text" name="mobileNumber" ng-model="mobileNumber" required="required" id="mobileNumber"  class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="email">Email:</label>
 						<input type="email" name="email" id="email"  ng-model="email" class="form-control">
 					</div>
-					<!-- <div  class="form-group">
-					<label for="Item">Item:</label>
-						<select id="item" name="Item"  ng-model="item" class="form-control">
-								<option value="s">Select</option>
-						</select>
-					</div> -->
 					<div class="form-group">
 						<label for="message">Joining Date:</label>
-						<input type="date" name="joiningDate" id="joiningDate" ng-model="joiningDate" class="form-control">
+						<input type="date" name="joiningDate" required="required" id="joiningDate" ng-model="joiningDate" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="address">Address :</label>
+						<textarea  name="address" id="address" required="required"  ng-model="address" class="form-control"></textarea>
 					</div>					
 				</div>
 				<div class="modal-footer">					
@@ -165,7 +164,8 @@
 					<th>FirstName</th>
 					<th>LastName</th>
 					<th>Mobile Number</th>
-					<th>eMail</th>
+					<th>Date</th>
+					<th>Address</th>
 				</tr>
 			</thead>
 		</table>
@@ -186,12 +186,16 @@
 									+ item.firstName + '</td><td>'
 									+ item.lastName + '</td><td>'
 									+ item.mobileNumber + '</td><td>'
-									+ item.email + '</td></tr>';
+									+ item.joiningDate + '</td><td>'
+									+ item.address + '</td></tr>';
 						});
 						text += '</tbody>';
 						$('#example').append(text);
 						$('#example').DataTable({
-							"bLengthChange": false
+							"bLengthChange": false,
+							columnDefs: [
+							       { type: 'date-dd-mmm-yyyy', targets: 4}
+							     ]
 							/* dom: 'Bfrtip',
 					        buttons: [
 					        	 'copyHtml5',

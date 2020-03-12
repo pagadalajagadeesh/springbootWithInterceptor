@@ -8,8 +8,11 @@
 <title>home</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script
+	src="<%=request.getContextPath()%>/css/jquery/jquery-3.2.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/angular.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/app.js"></script>
+
 <!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 <link href="<%=request.getContextPath()%>/css/app.css" rel="stylesheet" />
@@ -57,8 +60,7 @@
 <!--===============================================================================================-->
 
 <!--===============================================================================================-->
-<script
-	src="<%=request.getContextPath()%>/css/jquery/jquery-3.2.1.min.js"></script>
+
 <!--===============================================================================================-->
 <script
 	src="<%=request.getContextPath()%>/css/animsition/js/animsition.min.js"></script>
@@ -111,16 +113,30 @@
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 <script
 	src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/date-dd-MMM-yyyy.js"></script>
 </head>
 <body ng-app="masterDataApp" >
 <div class="container" class="h-65 d-inline-block">
   <div class="row">
-    <div class="col-sm-4">
-      <form ng-controller="submitMasterDataController"  id="saveMasterData"   ng-submit="saveMasterData()" >
+    <div class="col-sm-3">
+      <form ng-controller="submitMasterDataController"  id="saveMasterData"  >
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="name">Name:</label>
-						<input type="text" name="name" required="required" ng-model="name"  id="name"  class="form-control">
+						 <label>Select Customer : </label>
+					        <select class="form-control select2" required="required" id="userSelect" p>
+					        </select>
+					</div>
+					<div class="form-group">
+						 <label>Select Item/Items : </label>
+					        <select multiple class="form-control select2" required="required" id="itemSelect">
+					        </select>
+					</div>
+					<div class="form-group">
+						<label for="message">Servicing Date:</label>
+						<input type="date" name="servicingDate" required="required" id="servicingDate" ng-model="servicingDate" class="form-control">
 					</div>
 					<div class="form-group">
 						<label for="name">Cost :</label>
@@ -129,18 +145,19 @@
 				</div>
 				<div class="modal-footer">					
 					<button type="reset" class="btn btn-danger"  >Reset</button>
-					 <button type="submit" id="submitMasterData" class="btn btn-success">Save</button>
+					 <button type="submit" id="submitCustomerTransaction" class="btn btn-success">Save</button>
 				</div>
 			</form>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-9">
       <table id="masterDataTable" class="table table-striped table-bordered">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Product Name</th>
+					<th>Customer Name</th>
+					<th>Service</th>
+					<th>Service Date</th>
 					<th>Cost</th>
-					<th>Actions</th>
 				</tr>
 			</thead>
 		</table>
@@ -154,24 +171,24 @@
 				var text = '<tbody>';
 				$.ajax({
 					type : 'GET',
-					url : "getMasterData?validationKey="
+					url : "getCustomerTransactionData?validationKey="
 							+ new URLSearchParams(window.location.search)
 									.get('validationKey'),
 					success : function(data) {
 						jQuery.each(data, function(index, item) {
-							text += '<tr><td>' + item.id + '</td><td>'
-									+ item.name + '</td><td>'
+							text += '<tr><td>'+ item.id +'</td><td>' + item.customer.firstName +' '+ item.customer.lastName+ '</td><td>'
+									+ item.masterDataDetails + '</td><td>'
+									+ item.serviceDate + '</td><td>'
 									+ item.cost + '</td>';
-							if(item.active){
-								text +='<td><button type=\"button\" onclick=disableMe('+ item.id +')  class=\"btn btn-danger disable\">Disable</button></td></tr>'
-							}else{
-								text +='<td><button type=\"button\" onclick=enableMe('+ item.id +') class=\"btn btn-success enable\">Enable</button></td></tr>'
-							}
+							
 						});
 						text += '</tbody>';
 						$('#masterDataTable').append(text);
 						$('#masterDataTable').DataTable({
-							"bLengthChange": false
+							"bLengthChange": false,
+							columnDefs: [
+							       { type: 'date-dd-mmm-yyyy', targets: 4}
+							     ]
 							/* dom: 'Bfrtip',
 					        buttons: [
 					        	 'copyHtml5',
@@ -182,10 +199,42 @@
 							});
 					}
 				});
+
+	/* ********************** */
+					var append='';
+				$.ajax({
+					type : 'GET',
+					url : "getMasterData?validationKey="+ new URLSearchParams(window.location.search).get('validationKey'),
+					success : function(data) {
+						jQuery.each(data, function(index, item) {
+							
+							append+= '<option value='+item.id+'>'+item.name+'</option>' 
+						});
+						$('#itemSelect').append(append);
+						 $('#itemSelect').select2({width: "100%",placeholder: 'Choose One'	}).val('').trigger('change');
+					}
+				});
+
+
+				var appendItem='';
+				$.ajax({
+					type : 'GET',
+					url : "getEmployees?validationKey="+ new URLSearchParams(window.location.search).get('validationKey'),
+					success : function(data) {
+						jQuery.each(data, function(index, item) {
+							
+							appendItem+= '<option value='+item.id+'>'+item.firstName+' '+item.lastName+'</option>' 
+						});
+						$('#userSelect').append(appendItem);
+						  $('#userSelect').select2({width: "100%",placeholder: 'Choose One'	}).val('').trigger('change');
+					}
+				});
+				
 			});
 
 	
-
+	
+	 // $('#itemSelect').select2();
 
 
 	function disableMe(id) {
@@ -219,5 +268,39 @@
 
 		
 	}
+
+
+	$("#submitCustomerTransaction").click(function() {
+		
+	
+			if ($('#userSelect').val() == null
+								|| $('#itemSelect').val() == ''
+								|| $('#servicingDate').val() == ''
+								|| $('#cost').val() == '') {
+							return false
+						}
+
+				$.ajax({
+					type : 'POST',
+					url : 'saveCustomerTransactionData/'
+							+ parseInt($('#userSelect').val())
+							+ '/'
+							+ $('#itemSelect').val().map(Number)
+							+ '/'
+							+ $('#servicingDate').val()
+							+ '/'
+							+ $('#cost').val()
+							+ '/?validationKey='
+							+ new URLSearchParams(window.location.search)
+									.get('validationKey'),
+					success : function(resultData) {
+						location.reload();
+					},
+					error : function(resultData) {
+
+						alert("failed to save ");
+					}
+				});
+			});
 </script>
 </html>
