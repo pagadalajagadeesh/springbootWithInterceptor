@@ -1,0 +1,1 @@
+INSERT INTO `jagdi`.`user` (`id`,`password`, `username`, `active`) VALUES (1,'admin', 'admin', b'1')
