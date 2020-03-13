@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springBoot.interceptor.model.CustomerTransactions;
@@ -58,5 +59,10 @@ public class DataController {
 	@RequestMapping(value = "/getCustomerTransactionData", method = RequestMethod.GET)
 	public Object getCustomerTransactionData() {
 		return customerTransactionsService.getCustomerTransactionData();
+	}
+	
+	@RequestMapping(value = "/getCustomerTransactionReportData", method = RequestMethod.GET)
+	public Object getCustomerTransactionReportData(@RequestParam int year) {
+		return customerTransactionsService.getCustomerTransactionReportData(year);
 	}
 }

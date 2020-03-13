@@ -35,7 +35,7 @@ var customDateDDMMMYYYYToOrd = function (date) {
 
 // This will help DataTables magic detect the "dd-MMM-yyyy" format; Unshift
 // so that it's the first data type (so it takes priority over existing)
-debugger
+
 jQuery.fn.dataTableExt.aTypes.unshift(
 	function (sData) {
 		"use strict"; //let's avoid tom-foolery in this function

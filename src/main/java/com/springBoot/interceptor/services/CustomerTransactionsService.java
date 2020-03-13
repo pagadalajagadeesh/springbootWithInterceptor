@@ -3,6 +3,7 @@ package com.springBoot.interceptor.services;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,10 @@ public class CustomerTransactionsService {
 
 	public Object getCustomerTransactionData() {
 		return customerTransactionsRepository.findAll();
+	}
+
+	public Object getCustomerTransactionReportData(int year) {
+		return customerTransactionsRepository.getCustomerTransactionReportData(year);
 	}
 
 

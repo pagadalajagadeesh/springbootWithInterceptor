@@ -27,10 +27,6 @@ welcome.controller('submitMasterDataController', function($scope, $http,
 		$http.post(url, data, config).then(
 				function(response) {
 					$scope.postResultMessage = response.data;
-					
-					debugger
-					
-
 				},
 				function error(response) {
 					$scope.postResultMessage = "Error with status: "

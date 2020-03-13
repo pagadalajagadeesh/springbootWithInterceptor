@@ -36,6 +36,11 @@ public class ViewController extends WebMvcConfigurerAdapter {
 		return "customerTransactions";
 	}
 	
+	@RequestMapping(value = "/reports")
+	public String reports(Model model) {
+		return "reports";
+	}
+	
 	@RequestMapping(value = "/logout")
 	public String logout(Model model,@RequestParam String validationKey) {
 		userService.logout(validationKey);
