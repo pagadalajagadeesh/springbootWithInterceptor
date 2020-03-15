@@ -7,6 +7,13 @@ pipeline {
                  script {
                 try{
                   bat 'mkdir war'
+                  //bat 'move build\\libs\\*.war war\\'
+                } catch(Exception e){
+                  echo 'Exception occurred while removing old container...'
+                }
+                     
+                 try{
+                 // bat 'mkdir war'
                   bat 'move build\\libs\\*.war war\\'
                 } catch(Exception e){
                   echo 'Exception occurred while removing old container...'
